@@ -3,9 +3,9 @@ import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
   UPDATE_CATEGORIES,
-  CURRENT_CATEGORY,
+  UPDATE_CURRENT_CATEGORY,
   SAVE_PRODUCTS,
-} from "./Actions";
+} from "./actions";
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -19,7 +19,7 @@ export const reducer = (state, action) => {
         ...state,
         categories: [...action.categories],
       };
-    case CURRENT_CATEGORY:
+    case UPDATE_CURRENT_CATEGORY:
       return {
         ...state,
         currentCategory: action.currentCategory,
@@ -33,6 +33,7 @@ export const reducer = (state, action) => {
       return state;
   }
 };
+
 export function useProductReducer(initialState) {
-     return useReducer(reducer, initialState)
- }
+  return useReducer(reducer, initialState);
+}

@@ -1,43 +1,42 @@
-import React, { useEffect, useState } from "react";
-import {useStoreContext} from "../utils/GlobalState";
-import { UPDATE_CATEGORIES, CURRENT_CATEGORY } from "../utils/Actions";
 const axios = require("axios");
+import React, { useEffect } from "react";
+import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from "../utils/actions";
 
 function Categories() {
-  const [data, setData] = useState([]);
-  const [state, dispatch] = useStoreContext({});
-  
+  const [state, dispatch] = useStoreContext();
   const { categories } = state;
- 
-  useEffect(() => {
-    axios("https://fakestoreapi.com/products/").then((response) => {
-      setData(response.data);
-    })
 
-    if (data) {
+  const productsCategories = async () => {
+    const response = await axios
+      .get("https://fakestoreapi.com/products/categories")
+      .catch((err) => {
+        console.log(`error , ${err}`);
+      });
+    console.log(response);
+    if (response) {
       dispatch({
         type: UPDATE_CATEGORIES,
-        categories: data
+        categories: response.data,
       });
-    } 
-  }, [dispatch]);  
+    }
+  };
+  useEffect(() => {
+    productsCategories();
+  }, []);
 
-  console.log(data);  
-
-  function handleClick(id) {
+  const currentCategory = (categoryName) => {
     dispatch({
-      type: CURRENT_CATEGORY,
-      currentCategory: id
-    });
-    console.log(id)
+      type: UPDATE_CURRENT_CATEGORY,
+      currentCategory: categoryName
+    })
+    console.log(categoryName)
   }
 
   return (
     <div>
-      {data.filter((categories) => {
-        return (
-          <button onClick={handleClick} > {categories.name}</button>
-        )
+      {categories.map((cat) => {
+        return <button key={cat}>{cat}</button>;
       })}
     </div>
   );
