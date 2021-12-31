@@ -6,15 +6,15 @@ const axios = require("axios");
 
 function Products() {
   const [state, dispatch] = useStoreContext({});
-  const {products} = state
-    
+  const { products } = state;
+
   const getProducts = async () => {
     const response = await axios
       .get("https://fakestoreapi.com/products/")
       .catch((err) => {
         console.log(`error , ${err}`);
       });
-    console.log(response);
+    // console.log(response);
 
     if (response) {
       dispatch({
@@ -30,7 +30,20 @@ function Products() {
 
   return (
     <div>
-      <Cards />
+      {products.map((items) => { console.log(items);
+        return (
+          <Cards                        
+            key={items.id}
+            _id={items.id}
+            description={items.description}
+            category={items.category}
+            image={items.image}
+            title={items.title}
+            price={items.price}
+            rating={items.rating.count}
+          />
+        );
+      })}
     </div>
   );
 }
