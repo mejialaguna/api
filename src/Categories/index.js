@@ -4,6 +4,14 @@ import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from "../utils/actions";
 import Products from "../Products";
 const axios = require("axios");
 
+const display = {
+  cat: {
+    display: "flex",
+    margin: "20px",
+    justifyContent: "space-evenly",
+  },
+};
+
 function Categories() {
   const [name, setName] = useState();
   const [state, dispatch] = useStoreContext();
@@ -38,7 +46,7 @@ function Categories() {
 
   return (
     <div>
-      <form onSubmit={dispatchCategory}>
+      <form onSubmit={dispatchCategory} style={display.cat}>
         {categories.map((cat) => {
           return (
             <button onClick={() => setName(cat)} key={cat} type="submit">

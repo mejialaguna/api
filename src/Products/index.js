@@ -7,10 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-
 const axios = require("axios");
-
-
 
 function Products() {
   const [state, dispatch] = useStoreContext({});
@@ -40,22 +37,15 @@ function Products() {
     <div>
       {products.map((items) => {
         return (
-          <Container>
-            <Row>
-              <Col xs>
-                <Cards
-                  key={items.id}
-                  _id={items.id}
-                  description={items.description}
-                  category={items.category}
-                  image={items.image}
-                  title={items.title}
-                  price={items.price}
-                  rating={items.rating.count}
-                />
-              </Col>
-            </Row>
-          </Container>
+          <Cards
+            id={items.id}
+            description={items.description}
+            category={items.category}
+            image={items.image}
+            title={items.title}
+            price={items.price}
+            rating={items.rating.count}
+          />
         );
       })}
     </div>
