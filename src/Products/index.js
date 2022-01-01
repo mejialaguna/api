@@ -1,8 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../utils/actions";
-import Cards from "./Cars";
+import Cards from "./Cards";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+
 const axios = require("axios");
+
+
 
 function Products() {
   const [state, dispatch] = useStoreContext({});
@@ -30,18 +38,24 @@ function Products() {
 
   return (
     <div>
-      {products.map((items) => { console.log(items);
+      {products.map((items) => {
         return (
-          <Cards                        
-            key={items.id}
-            _id={items.id}
-            description={items.description}
-            category={items.category}
-            image={items.image}
-            title={items.title}
-            price={items.price}
-            rating={items.rating.count}
-          />
+          <Container>
+            <Row>
+              <Col xs>
+                <Cards
+                  key={items.id}
+                  _id={items.id}
+                  description={items.description}
+                  category={items.category}
+                  image={items.image}
+                  title={items.title}
+                  price={items.price}
+                  rating={items.rating.count}
+                />
+              </Col>
+            </Row>
+          </Container>
         );
       })}
     </div>

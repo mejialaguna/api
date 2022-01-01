@@ -1,19 +1,19 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+import { Card } from "@material-ui/core";
+import {CardHeader} from "@material-ui/core";
+import {CardMedia} from "@material-ui/core";
+import {CardContent} from "@material-ui/core";
+import {CardActions }from "@material-ui/core";
+import {Collapse} from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+// import ShareIcon from "@material-ui/icons/Share";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,51 +38,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const display = {
-    flex:
-}
-
 const Cards = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const { name, id, description, category, image, price , rating , title } = props;
+  const { id, description, category, image, price , title } = props;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+    const date = new Date().toLocaleDateString()
   return (
-    <Card className={classes.root} key= {id}>
+    <Card className={classes.root} key={id}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
             R
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        
         title={title}
-        subheader="September 14, 2016"
+        subheader={date}
       />
-      <CardMedia
-        className={classes.media}
-        image={image}
-        title={title}
-      />
+      <CardMedia className={classes.media} image={image} title={title} />
       <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+           {category}
+        </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           price: $ {price}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites"></IconButton>
-        <IconButton aria-label="share">
+        {/* <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton>
-        <IconButton
+        </IconButton> */}
+        {/* <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
           })}
@@ -91,15 +83,13 @@ const Cards = (props) => {
           aria-label="show more"
         >
           <ExpandMoreIcon />
-        </IconButton>
+        </IconButton> */}
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Description:</Typography>
-          
-          <Typography paragraph>
-            {description}
-          </Typography>
+
+          <Typography paragraph>{description}</Typography>
         </CardContent>
       </Collapse>
     </Card>

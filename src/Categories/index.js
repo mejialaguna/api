@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from "../utils/actions";
-import Products from "../Products"
+import Products from "../Products";
 const axios = require("axios");
 
 function Categories() {
   const [name, setName] = useState();
   const [state, dispatch] = useStoreContext();
   const { categories } = state;
-   
 
   const productsCategories = async () => {
     const response = await axios
@@ -25,15 +24,14 @@ function Categories() {
     }
   };
 
-    
   const dispatchCategory = (event) => {
     event.preventDefault();
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,
-      currentCategory: name
+      currentCategory: name,
     });
-  };  
-  
+  };
+
   useEffect(() => {
     productsCategories();
   }, []);
@@ -41,13 +39,13 @@ function Categories() {
   return (
     <div>
       <form onSubmit={dispatchCategory}>
-      {categories.map((cat) => {
-        return (
+        {categories.map((cat) => {
+          return (
             <button onClick={() => setName(cat)} key={cat} type="submit">
               {cat}
             </button>
-        );
-      })}        
+          );
+        })}
       </form>
       <Products />
     </div>
