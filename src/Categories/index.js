@@ -36,7 +36,7 @@ function Categories() {
     event.preventDefault();
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,
-      currentCategory: name,
+      currentCategory: name, //name is the state
     });
   };
 
@@ -55,7 +55,6 @@ function Categories() {
           );
         })}
       </form>
-      <Products />
     </div>
   );
 }

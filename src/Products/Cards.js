@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { Card } from "@material-ui/core";
@@ -12,6 +12,9 @@ import { IconButton } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import { Link } from "react-router-dom";
+import { useStoreContext } from "../utils/GlobalState";
+import { SAVED_PRODUCTS } from "../utils/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,11 +42,24 @@ const useStyles = makeStyles((theme) => ({
 const Cards = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const { id,description, category, image, price, title } = props;
+  const { id, description, category, image, price, title } = props;
+  const [state, dispatch] = useStoreContext();
+
+  const products = state;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  useEffect(() => {
+    const handleSaved = () => {
+      dispatch({
+        type: SAVED_PRODUCTS,
+        savedProducts: [...savedProducts],
+      });
+    }
+    handleSaved()
+  }, [state.savedProducts.length, dispatch]);
 
   const date = new Date().toLocaleDateString();
   return (
@@ -51,7 +67,7 @@ const Cards = (props) => {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            JLML
           </Avatar>
         }
         title={title}
@@ -67,10 +83,11 @@ const Cards = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites"></IconButton>
-        {/* <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
+        {/* <Link to="savedProducts/yourProducts" > */}
+        <IconButton aria-label="add to favorites" onClick={handleSaved}>
+          save to favorite
+        </IconButton>
+        {/* </Link> */}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

@@ -3,15 +3,12 @@ import { useEffect } from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../utils/actions";
 import Cards from "./Cards";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const axios = require("axios");
 
 function Products() {
-  const [state, dispatch] = useStoreContext({});
-  const { products } = state;
+  const [state, dispatch] = useStoreContext();
+  const { currentCategory } = state;
 
   const getProducts = async () => {
     const response = await axios
@@ -19,7 +16,7 @@ function Products() {
       .catch((err) => {
         console.log(`error , ${err}`);
       });
-    // console.log(response);
+    console.log(response);
 
     if (response) {
       dispatch({
@@ -33,11 +30,22 @@ function Products() {
     getProducts();
   }, []);
 
+  function filterProducts() {
+    if (!currentCategory) {
+      return state.products;
+    }
+
+    return state.products.filter(
+      (product) => product.category === currentCategory
+    );
+  }
+
   return (
     <div>
-      {products.map((items) => {
+      {filterProducts().map((items) => {
         return (
           <Cards
+            key={items.id}
             id={items.id}
             description={items.description}
             category={items.category}

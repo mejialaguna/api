@@ -4,7 +4,7 @@ import {
   UPDATE_PRODUCTS,
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
-  SAVE_PRODUCTS,
+  SAVED_PRODUCTS,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -24,10 +24,10 @@ export const reducer = (state, action) => {
         ...state,
         currentCategory: action.currentCategory,
       };
-    case SAVE_PRODUCTS:
+    case SAVED_PRODUCTS:
       return {
         ...state,
-        saveProducts: [...action.saveProducts],
+        savedProducts: [...state.savedProducts, action.product],
       };
     default:
       return state;
