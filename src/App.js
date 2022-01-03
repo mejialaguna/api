@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Home from "./Home";
+import Home from "./Home/index.js";
 import Saved from "./Saved"
 import {StoreProvider} from "./utils/GlobalState"
 
@@ -10,9 +10,10 @@ function App() {
     <Router>
       <div>
         <StoreProvider>
+          {/* <Saved /> */}
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="savedProducts/yourProducts" component={Saved}/>
+            <Route path="/savedProducts" component={Saved} />
           </Switch>
         </StoreProvider>
       </div>

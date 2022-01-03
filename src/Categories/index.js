@@ -44,6 +44,8 @@ function Categories() {
     productsCategories();
   }, []);
 
+ 
+
   return (
     <div>
       <form onSubmit={dispatchCategory} style={display.cat}>
@@ -54,8 +56,8 @@ function Categories() {
             </button>
           );
         })}
-        <Link to="savedProducts/yourProducts">
-          <button> favorites</button>
+        <Link to="/savedProducts/">
+          <button > Favorites </button>
         </Link>
       </form>
     </div>

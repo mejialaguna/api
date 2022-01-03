@@ -16,7 +16,7 @@ function Products() {
       .catch((err) => {
         console.log(`error , ${err}`);
       });
-    console.log(response);
+    // console.log(response);
 
     if (response) {
       dispatch({

@@ -44,20 +44,22 @@ const Cards = (props) => {
   const [expanded, setExpanded] = React.useState(false);
   const { id, description, category, image, price, title } = props;
   const [state, dispatch] = useStoreContext();
+  const {savedProducts} = state
 
-  
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const handleSaved = () => {
+  const handleSaved = (event) => {
+    event.preventDefault();
+
     dispatch({
       type: SAVED_PRODUCTS,
-      product: { ...props,},
+      product: { ...props }
     });
+    console.log(savedProducts);
   };
 
-  
 
   const date = new Date().toLocaleDateString();
   return (
