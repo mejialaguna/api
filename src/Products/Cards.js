@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { Card } from "@material-ui/core";
@@ -45,21 +45,19 @@ const Cards = (props) => {
   const { id, description, category, image, price, title } = props;
   const [state, dispatch] = useStoreContext();
 
-  const products = state;
-
+  
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  useEffect(() => {
-    const handleSaved = () => {
-      dispatch({
-        type: SAVED_PRODUCTS,
-        savedProducts: [...savedProducts],
-      });
-    }
-    handleSaved()
-  }, [state.savedProducts.length, dispatch]);
+  const handleSaved = () => {
+    dispatch({
+      type: SAVED_PRODUCTS,
+      product: { ...props,},
+    });
+  };
+
+  
 
   const date = new Date().toLocaleDateString();
   return (

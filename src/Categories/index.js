@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from "../utils/actions";
-import Products from "../Products";
+import { Link } from "react-router-dom";
 const axios = require("axios");
 
 const display = {
@@ -54,6 +54,9 @@ function Categories() {
             </button>
           );
         })}
+        <Link to="savedProducts/yourProducts">
+          <button> favorites</button>
+        </Link>
       </form>
     </div>
   );
