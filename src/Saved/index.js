@@ -1,34 +1,34 @@
-import React , {useState , useEffect} from "react";
+import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
-import { Card, Button } from "react-bootstrap";
+// import { Card } from "react-bootstrap";
+import Cards from "../Cards"
 
 function Saved() {
   const [state, dispatch] = useStoreContext();
   const { savedProducts } = state;
-  console.log(savedProducts);  
-
+  console.log(savedProducts);
 
   return (
     <div>
-      {!savedProducts ? (
+      {!savedProducts.length ? (
         <p> start saving some products before checking your favorites </p>
       ) : (
-        savedProducts.map((items , i) => { console.log(items)
+        savedProducts.map((items, i) => {
+          console.log(items);
           return (
-            <Card style={{ width: "18rem" }} key= {i}>
-              <Card.Img variant="top" src={items.image} />
-              <Card.Body>
-                <Card.Title>{items.Title}</Card.Title>
-                <Card.Text>
-                  {items.description}
-                </Card.Text>
-                <Card.Footer> {items.price}</Card.Footer>
-              </Card.Body>
-            </Card>
+            <Cards
+              key={items.id}
+              id={items.id}
+              description={items.description}
+              category={items.category}
+              image={items.image}
+              title={items.title}
+              price={items.price}
+              rating={items.rating.count}
+            />
           );
         })
       )}
-      
     </div>
   );
 }

@@ -10,7 +10,6 @@ function App() {
     <Router>
       <div>
         <StoreProvider>
-          {/* <Saved /> */}
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/savedProducts" component={Saved} />

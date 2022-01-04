@@ -2,11 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../utils/actions";
-import Cards from "./Cards";
+import Cards from "../Cards";
 
 const axios = require("axios");
 
-function Products() {
+export default function Products() {
   const [state, dispatch] = useStoreContext();
   const { currentCategory } = state;
 
@@ -39,7 +39,6 @@ function Products() {
       (product) => product.category === currentCategory
     );
   }
-
   return (
     <div>
       {filterProducts().map((items) => {
@@ -59,5 +58,3 @@ function Products() {
     </div>
   );
 }
-
-export default Products;

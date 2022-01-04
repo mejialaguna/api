@@ -4,7 +4,7 @@ import Categories from "../Categories";
 
 const Home = () => {
   return (
-    <div className="container">
+    <div>
       <Categories />
       <Products />
     </div>
