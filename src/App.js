@@ -11,7 +11,7 @@ function App() {
       <div>
         <StoreProvider>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/api" component={Home} />
             <Route path="/savedProducts" component={Saved} />
           </Switch>
         </StoreProvider>
