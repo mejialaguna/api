@@ -1,7 +1,14 @@
 import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
-// import { Card } from "react-bootstrap";
-import Cards from "../Cards"
+import { Container, Row, Col } from "react-bootstrap";
+import Cards from "../Cards";
+
+
+const display = {
+  margin: {
+    marginBottom: "55px",
+  },
+};
 
 function Saved() {
   const [state, dispatch] = useStoreContext();
@@ -9,27 +16,31 @@ function Saved() {
   console.log(savedProducts);
 
   return (
-    <div>
-      {!savedProducts.length ? (
-        <p> start saving some products before checking your favorites </p>
-      ) : (
-        savedProducts.map((items, i) => {
-          console.log(items);
-          return (
-            <Cards
-              key={items.id}
-              id={items.id}
-              description={items.description}
-              category={items.category}
-              image={items.image}
-              title={items.title}
-              price={items.price}
-              rating={items.rating.count}
-            />
-          );
-        })
-      )}
-    </div>
+    <Container>
+      <Row>
+        {!savedProducts.length ? (
+          <p> start saving some products before checking your favorites </p>
+        ) : (
+          savedProducts.map((items, i) => {
+            console.log(items);
+            return (
+              <Col md={4} key={items.id} style={display.margin}>
+                <Cards
+                  key={items.id}
+                  id={items.id}
+                  description={items.description}
+                  category={items.category}
+                  image={items.image}
+                  title={items.title}
+                  price={items.price}
+                  rating={items.rating.count}
+                />
+              </Col>
+            );
+          })
+        )}
+      </Row>
+    </Container>
   );
 }
 

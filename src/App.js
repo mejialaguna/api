@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Home/index.js";
-import Saved from "./Saved"
-import {StoreProvider} from "./utils/GlobalState"
+import Saved from "./Saved";
+import { StoreProvider } from "./utils/GlobalState";
 
 function App() {
   return (

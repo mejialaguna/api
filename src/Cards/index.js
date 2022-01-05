@@ -16,10 +16,7 @@ import { useStoreContext } from "../utils/GlobalState";
 import { SAVED_PRODUCTS } from "../utils/actions";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -56,7 +53,7 @@ const Cards = (props) => {
   const [expanded, setExpanded] = React.useState(false);
   const { id, description, category, image, price, title } = props;
   const [state, dispatch] = useStoreContext();
-  const {savedProducts} = state
+  const { savedProducts } = state;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -65,94 +62,69 @@ const Cards = (props) => {
   const handleSaved = () => {
     dispatch({
       type: SAVED_PRODUCTS,
-      product: { ...props }
+      product: { ...props },
     });
     console.log(savedProducts);
   };
 
   const display = {
     grid: {
-      margin: "auto"
-    }
-  }
+      margin: "auto",
+    },
+  };
 
   const date = new Date().toLocaleDateString();
   return (
-    <div>
-      <Box >
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
-            <Item>
-              <Card className={classes.root} key={id} style={display.grid}>
-                <CardHeader
-                  avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      JLML
-                    </Avatar>
-                  }
-                  title={title}
-                  subheader={date}
-                />
-                <CardMedia
-                  className={classes.media}
-                  image={image}
-                  title={title}
-                />
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {category}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    price: $ {price}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  {/* <Link to="savedProducts/yourProducts" > */}
+    <Card className={classes.root} key={id} style={display.grid}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            JLML
+          </Avatar>
+        }
+        title={title}
+        subheader={date}
+      />
+      <CardMedia className={classes.media} image={image} title={title} />
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {category}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          price: $ {price}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        {/* <Link to="savedProducts/yourProducts" > */}
 
-                  <IconButton
-                    aria-label="add to favorites"
-                    onClick={handleSaved}
-                    disabled={savedProducts?.some(
-                      (newProduct) => newProduct.id === id
-                    )}
-                  >
-                    {savedProducts?.find((newProduct) => newProduct.id === id)
-                      ? "description"
-                      : "add to favorites"}
-                  </IconButton>
-                  {/* </Link> */}
-                  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
-                    <Typography paragraph>Description:</Typography>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={handleSaved}
+          disabled={savedProducts?.some((newProduct) => newProduct.id === id)}
+        >
+          {savedProducts?.find((newProduct) => newProduct.id === id)
+            ? "description"
+            : "add to favorites"}
+        </IconButton>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>Description:</Typography>
 
-                    <Typography paragraph>{description}</Typography>
-                  </CardContent>
-                </Collapse>
-              </Card>
-            </Item>
-          </Grid>
-        </Grid>
-      </Box>
-    </div>
+          <Typography paragraph>{description}</Typography>
+        </CardContent>
+      </Collapse>
+    </Card>
   );
 };
 
