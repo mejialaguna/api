@@ -3,13 +3,6 @@ import { useStoreContext } from "../utils/GlobalState";
 import { Container, Row, Col } from "react-bootstrap";
 import Cards from "../Cards";
 
-
-const display = {
-  margin: {
-    marginBottom: "55px",
-  },
-};
-
 function Saved() {
   const [state, dispatch] = useStoreContext();
   const { savedProducts } = state;
@@ -17,14 +10,16 @@ function Saved() {
 
   return (
     <Container>
+        {savedProducts.length ? 
+          <h1 style={{  margin: "25px" }}>
+            total saved products: {savedProducts.length}
+          </h1>
+        : null}
       <Row>
-        {!savedProducts.length ? (
-          <p> start saving some products before checking your favorites </p>
-        ) : (
+        {state.savedProducts.length ? (
           savedProducts.map((items, i) => {
-            console.log(items);
             return (
-              <Col md={4} key={items.id} style={display.margin}>
+              <Col md={4} key={items.id} style={{ margin: "25px 0" }}>
                 <Cards
                   key={items.id}
                   id={items.id}
@@ -38,6 +33,8 @@ function Saved() {
               </Col>
             );
           })
+        ) : (
+          <p> start saving some products before checking your favorites </p>
         )}
       </Row>
     </Container>
